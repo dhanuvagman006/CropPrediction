@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predict Yield — AgriPredict DK</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">AgriPredict DK</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="predict.html" class="active">Predict</a></li>
+        <li><a href="crops.html">Crops</a></li>
+        <li><a href="comparison.html">Model Comparison</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Predict Crop Yield</h1>
+      <p>Enter soil, climate, and farming parameters to get an AI-powered yield prediction</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="predict-layout">
+      <div class="form-panel">
+        <div class="card">
+          <div class="step">
+            <div class="step-title"><span class="step-num">1</span> Select Crop</div>
+            <div class="crop-grid">
+              <input type="radio" name="crop" id="crop-rice" value="rice" class="crop-radio" checked>
+              <label for="crop-rice" class="crop-label"><span class="crop-emoji">🌾</span>Rice</label>
+              <input type="radio" name="crop" id="crop-coconut" value="coconut" class="crop-radio">
+              <label for="crop-coconut" class="crop-label"><span class="crop-emoji">🥥</span>Coconut</label>
+              <input type="radio" name="crop" id="crop-arecanut" value="arecanut" class="crop-radio">
+              <label for="crop-arecanut" class="crop-label"><span class="crop-emoji">🌴</span>Arecanut</label>
+              <input type="radio" name="crop" id="crop-banana" value="banana" class="crop-radio">
+              <label for="crop-banana" class="crop-label"><span class="crop-emoji">🍌</span>Banana</label>
+              <input type="radio" name="crop" id="crop-pepper" value="black pepper" class="crop-radio">
+              <label for="crop-pepper" class="crop-label"><span class="crop-emoji">🌶️</span>Black Pepper</label>
+              <input type="radio" name="crop" id="crop-cashew" value="cashew" class="crop-radio">
+              <label for="crop-cashew" class="crop-label"><span class="crop-emoji">🥜</span>Cashew</label>
+              <input type="radio" name="crop" id="crop-cocoa" value="cocoa" class="crop-radio">
+              <label for="crop-cocoa" class="crop-label"><span class="crop-emoji">🍫</span>Cocoa</label>
+              <input type="radio" name="crop" id="crop-potato" value="sweet potato" class="crop-radio">
+              <label for="crop-potato" class="crop-label"><span class="crop-emoji">🍠</span>Sweet Potato</label>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-title"><span class="step-num">2</span> Select Model</div>
+            <div class="model-tabs">
+              <input type="radio" name="model" id="model-lstm" value="LSTM" class="model-radio" checked>
+              <label for="model-lstm" class="model-label">LSTM</label>
+              <input type="radio" name="model" id="model-bilstm" value="BiLSTM" class="model-radio">
+              <label for="model-bilstm" class="model-label">BiLSTM</label>
+              <input type="radio" name="model" id="model-gru" value="GRU" class="model-radio">
+              <label for="model-gru" class="model-label">GRU</label>
+              <input type="radio" name="model" id="model-cnnlstm" value="CNN-LSTM" class="model-radio">
+              <label for="model-cnnlstm" class="model-label">CNN-LSTM</label>
+              <input type="radio" name="model" id="model-transformer" value="Transformer" class="model-radio">
+              <label for="model-transformer" class="model-label">Transformer</label>
+              <input type="radio" name="model" id="model-autoencoder" value="Autoencoder" class="model-radio">
+              <label for="model-autoencoder" class="model-label">Autoencoder</label>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-title"><span class="step-num">3</span> Input Parameters</div>
+            <div id="params-container">
+              <p style="color: var(--text-muted); text-align: center; padding: 20px;">Loading parameters...</p>
+            </div>
+          </div>
+
+          <button type="button" id="predict-btn" class="btn btn-primary btn-block">Predict Yield</button>
+          <div class="loading-spinner" id="loading"></div>
+          <div class="error-alert" id="error-alert"></div>
+        </div>
+      </div>
+
+      <div class="result-panel">
+        <div class="card">
+          <div class="result-placeholder" id="result-placeholder">
+            <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="80" width="160" height="60" rx="8" fill="#E0D8CC"/>
+              <path d="M40 80V60C40 40 60 20 100 20C140 20 160 40 160 60V80" stroke="#B8A88A" stroke-width="3" fill="none"/>
+              <path d="M60 80V70C60 55 75 45 100 45C125 45 140 55 140 70V80" stroke="#B8A88A" stroke-width="2" fill="none"/>
+              <circle cx="100" cy="110" r="12" fill="#D4A017"/>
+              <path d="M88 108L100 100L112 108L100 120Z" fill="#1B4332"/>
+              <path d="M50 120H150" stroke="#B8A88A" stroke-width="2"/>
+              <path d="M70 130H130" stroke="#B8A88A" stroke-width="1.5"/>
+            </svg>
+            <p>Enter parameters and click "Predict Yield" to see results</p>
+          </div>
+
+          <div class="result-content" id="result-content">
+            <div class="result-value" id="result-value">—</div>
+            <div class="result-unit">kg/ha</div>
+            <div class="result-badges">
+              <span class="badge badge-crop" id="result-crop">—</span>
+              <span class="badge badge-model" id="result-model">—</span>
+            </div>
+            <div class="confidence-bar">
+              <div class="confidence-labels">
+                <span id="ci-lower">—</span>
+                <span id="ci-upper">—</span>
+              </div>
+              <div class="confidence-track">
+                <div class="confidence-dot"></div>
+              </div>
+            </div>
+            <div class="category-badge" id="result-category">—</div>
+            <div class="result-interpretation" id="result-interpretation"></div>
+            <button type="button" id="reset-btn" class="btn btn-secondary btn-block" style="color: var(--primary); border-color: var(--primary);">Try Another Prediction</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Crop Yield Prediction System — Dakshina Kannada | MTech Research Project</p>
+  </footer>
+
+  <script src="js/predict.js"></script>
+</body>
+</html>

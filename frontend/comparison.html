@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Comparison — AgriPredict DK</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">AgriPredict DK</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="predict.html">Predict</a></li>
+        <li><a href="crops.html">Crops</a></li>
+        <li><a href="comparison.html" class="active">Model Comparison</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Deep Learning Model Performance</h1>
+      <p>Comparative evaluation across 6 models and 8 crops</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="crop-tabs" id="crop-tabs">
+      <button class="crop-tab active" data-crop="all">All Crops</button>
+      <button class="crop-tab" data-crop="rice">Rice</button>
+      <button class="crop-tab" data-crop="coconut">Coconut</button>
+      <button class="crop-tab" data-crop="arecanut">Arecanut</button>
+      <button class="crop-tab" data-crop="banana">Banana</button>
+      <button class="crop-tab" data-crop="black pepper">Black Pepper</button>
+      <button class="crop-tab" data-crop="cashew">Cashew</button>
+      <button class="crop-tab" data-crop="cocoa">Cocoa</button>
+      <button class="crop-tab" data-crop="sweet potato">Sweet Potato</button>
+    </div>
+
+    <div class="summary-cards" id="summary-cards">
+      <div style="text-align:center;padding:40px;grid-column:1/-1;color:var(--text-muted);">Loading model metrics...</div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="data-table" id="metrics-table">
+        <thead>
+          <tr>
+            <th data-sort="model">Model</th>
+            <th data-sort="avg_r2">R² Score <span class="sort-arrow"></span></th>
+            <th data-sort="avg_rmse">RMSE (kg/ha) <span class="sort-arrow"></span></th>
+            <th data-sort="avg_mae">MAE (kg/ha) <span class="sort-arrow"></span></th>
+            <th data-sort="avg_mape">MAPE (%) <span class="sort-arrow"></span></th>
+            <th data-sort="avg_nse">NSE <span class="sort-arrow"></span></th>
+            <th data-sort="avg_accuracy">Accuracy (%) <span class="sort-arrow"></span></th>
+            <th data-sort="avg_size">Size (KB) <span class="sort-arrow"></span></th>
+            <th>Rank</th>
+          </tr>
+        </thead>
+        <tbody id="metrics-tbody">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-grid">
+      <div class="chart-card">
+        <h3>Model Accuracy by Crop</h3>
+        <canvas id="bar-chart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Multi-Metric Radar: Model Comparison</h3>
+        <canvas id="radar-chart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>R² Score Across Crops per Model</h3>
+        <canvas id="line-chart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>RMSE vs R² — All Models & Crops</h3>
+        <canvas id="scatter-chart"></canvas>
+      </div>
+      <div class="chart-card full-width">
+        <h3>Accuracy Heatmap: Crops × Models</h3>
+        <div class="heatmap-container" id="heatmap-container"></div>
+      </div>
+    </div>
+
+    <div class="recommendation-card" id="recommendation-card">
+      <h3>Best Model Recommendation</h3>
+      <p id="recommendation-text">Loading...</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Crop Yield Prediction System — Dakshina Kannada | MTech Research Project</p>
+  </footer>
+
+  <script src="js/comparison.js"></script>
+</body>
+</html>

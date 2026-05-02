@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crops of Dakshina Kannada — AgriPredict DK</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-brand">AgriPredict DK</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="predict.html">Predict</a></li>
+        <li><a href="crops.html" class="active">Crops</a></li>
+        <li><a href="comparison.html">Model Comparison</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Crops of Dakshina Kannada</h1>
+      <p>Regional crop data, seasonal calendar, and yield benchmarks</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search by crop name, season, or soil type..." aria-label="Search crops">
+    </div>
+
+    <div class="table-wrapper">
+      <table class="data-table" id="crops-table">
+        <thead>
+          <tr>
+            <th>Crop Name</th>
+            <th>Season</th>
+            <th>Soil Type</th>
+            <th>Yield Range (kg/ha)</th>
+            <th>Optimal Rainfall (mm)</th>
+            <th>Optimal Temp (°C)</th>
+            <th>Major Districts</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody id="crops-tbody">
+          <tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-muted);">Loading crop data...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="calendar-section">
+      <h2>Seasonal Calendar — Sowing & Harvest Periods</h2>
+      <div class="calendar-grid" id="calendar-grid">
+        <div class="calendar-row header">
+          <div></div>
+          <div>Jan</div><div>Feb</div><div>Mar</div><div>Apr</div>
+          <div>May</div><div>Jun</div><div>Jul</div><div>Aug</div>
+          <div>Sep</div><div>Oct</div><div>Nov</div><div>Dec</div>
+        </div>
+      </div>
+      <div class="calendar-legend">
+        <span><span class="legend-dot" style="background:rgba(27,67,50,0.15);"></span> Sowing</span>
+        <span><span class="legend-dot" style="background:rgba(27,67,50,0.3);"></span> Growing</span>
+        <span><span class="legend-dot" style="background:var(--accent);"></span> Harvest</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Crop Yield Prediction System — Dakshina Kannada | MTech Research Project</p>
+  </footer>
+
+  <script src="js/crops.js"></script>
+</body>
+</html>
