@@ -6,6 +6,8 @@ from tensorflow import keras
 import warnings
 warnings.filterwarnings("ignore")
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+from pathlib import Path
+import json
 
 CATEGORICAL_COLS = ["soil_type", "irrigation_type", "crop_variety", "farm_mechanization"]
 NUMERIC_COLS = [
@@ -32,13 +34,16 @@ CROP_YIELD_RANGES = {
 _loaded_models = {}
 _loaded_scalers = {}
 _loaded_encoders = {}
+MODEL_EXT = ".keras"
+BASE_DIR = Path(__file__).resolve().parent
+MODELS_DIR = BASE_DIR / "models"
 
 
 def _load_model(crop, model_name):
     key = f"{crop}_{model_name}"
     if key not in _loaded_models:
-        path = f"models/{crop}_{model_name}.h5"
-        if not os.path.exists(path):
+        path = MODELS_DIR / f"{crop}_{model_name}{MODEL_EXT}"
+        if not path.exists():
             raise FileNotFoundError(f"Model not found: {path}")
         _loaded_models[key] = keras.models.load_model(path)
     return _loaded_models[key]
@@ -46,9 +51,9 @@ def _load_model(crop, model_name):
 
 def _load_scalers(crop):
     if crop not in _loaded_scalers:
-        with open(f"models/{crop}_scaler_X.pkl", "rb") as f:
+        with open(MODELS_DIR / f"{crop}_scaler_X.pkl", "rb") as f:
             scaler_x = pickle.load(f)
-        with open(f"models/{crop}_scaler_y.pkl", "rb") as f:
+        with open(MODELS_DIR / f"{crop}_scaler_y.pkl", "rb") as f:
             scaler_y = pickle.load(f)
         _loaded_scalers[crop] = (scaler_x, scaler_y)
     return _loaded_scalers[crop]
@@ -56,7 +61,7 @@ def _load_scalers(crop):
 
 def _load_encoders(crop):
     if crop not in _loaded_encoders:
-        with open(f"models/{crop}_label_encoders.pkl", "rb") as f:
+        with open(MODELS_DIR / f"{crop}_label_encoders.pkl", "rb") as f:
             encoders = pickle.load(f)
         _loaded_encoders[crop] = encoders
     return _loaded_encoders[crop]

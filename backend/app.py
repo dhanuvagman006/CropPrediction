@@ -2,12 +2,15 @@ import os
 import sys
 import json
 import numpy as np
+from pathlib import Path
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from predict import predict_yield, CROP_YIELD_RANGES, FEATURE_COLS, CATEGORICAL_COLS, NUMERIC_COLS
 
 app = Flask(__name__, static_folder="../frontend", static_url_path="")
 CORS(app)
+BASE_DIR = Path(__file__).resolve().parent
+METRICS_PATH = BASE_DIR / "metrics" / "model_metrics.json"
 
 CROPS = ["rice", "coconut", "arecanut", "banana", "black pepper", "cashew", "cocoa", "sweet potato"]
 MODEL_NAMES = ["LSTM", "BiLSTM", "GRU", "CNN-LSTM", "Transformer", "Autoencoder"]
@@ -159,10 +162,9 @@ def api_predict():
 @app.route("/api/metrics", methods=["GET"])
 def api_metrics():
     try:
-        metrics_path = "metrics/model_metrics.json"
-        if not os.path.exists(metrics_path):
+        if not METRICS_PATH.exists():
             return jsonify({"error": "Model metrics not found. Run train_models.py first."}), 404
-        with open(metrics_path, "r") as f:
+        with open(METRICS_PATH, "r") as f:
             metrics = json.load(f)
         return jsonify(metrics)
     except Exception as e:
@@ -355,10 +357,9 @@ def api_feature_config(crop):
 @app.route("/api/comparison-data", methods=["GET"])
 def api_comparison_data():
     try:
-        metrics_path = "metrics/model_metrics.json"
-        if not os.path.exists(metrics_path):
+        if not METRICS_PATH.exists():
             return jsonify({"error": "Model metrics not found. Run train_models.py first."}), 404
-        with open(metrics_path, "r") as f:
+        with open(METRICS_PATH, "r") as f:
             all_metrics = json.load(f)
 
         models = MODEL_NAMES
