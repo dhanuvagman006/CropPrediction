@@ -8,6 +8,443 @@
       "nse": 0.8682,
       "accuracy_percent": 98.7,
       "model_size_kb": 1571.7
+    },
+    "BiLSTM": {
+      "r2": 0.9046,
+      "rmse": 51.19,
+      "mae": 40.86,
+      "mape": 1.1,
+      "nse": 0.9046,
+      "accuracy_percent": 98.9,
+      "model_size_kb": 3893.9
+    },
+    "GRU": {
+      "r2": 0.8913,
+      "rmse": 54.66,
+      "mae": 44.01,
+      "mape": 1.18,
+      "nse": 0.8913,
+      "accuracy_percent": 98.82,
+      "model_size_kb": 1202.7
+    },
+    "CNN-LSTM": {
+      "r2": 0.8843,
+      "rmse": 56.38,
+      "mae": 44.98,
+      "mape": 1.2,
+      "nse": 0.8843,
+      "accuracy_percent": 98.8,
+      "model_size_kb": 403.2
+    },
+    "Transformer": {
+      "r2": 0.7763,
+      "rmse": 78.4,
+      "mae": 63.59,
+      "mape": 1.69,
+      "nse": 0.7763,
+      "accuracy_percent": 98.31,
+      "model_size_kb": 1809.2
+    },
+    "Autoencoder": {
+      "r2": 0.9029,
+      "rmse": 51.66,
+      "mae": 40.71,
+      "mape": 1.1,
+      "nse": 0.9029,
+      "accuracy_percent": 98.9,
+      "model_size_kb": 221.3
+    }
+  },
+  "coconut": {
+    "LSTM": {
+      "r2": 0.8947,
+      "rmse": 157.96,
+      "mae": 127.86,
+      "mape": 1.08,
+      "nse": 0.8947,
+      "accuracy_percent": 98.92,
+      "model_size_kb": 1571.7
+    },
+    "BiLSTM": {
+      "r2": 0.9081,
+      "rmse": 147.57,
+      "mae": 117.29,
+      "mape": 0.99,
+      "nse": 0.9081,
+      "accuracy_percent": 99.01,
+      "model_size_kb": 3893.9
+    },
+    "GRU": {
+      "r2": 0.9033,
+      "rmse": 151.35,
+      "mae": 121.41,
+      "mape": 1.02,
+      "nse": 0.9033,
+      "accuracy_percent": 98.98,
+      "model_size_kb": 1202.7
+    },
+    "CNN-LSTM": {
+      "r2": 0.8898,
+      "rmse": 161.56,
+      "mae": 130.29,
+      "mape": 1.1,
+      "nse": 0.8898,
+      "accuracy_percent": 98.9,
+      "model_size_kb": 403.2
+    },
+    "Transformer": {
+      "r2": 0.7489,
+      "rmse": 243.88,
+      "mae": 196.87,
+      "mape": 1.64,
+      "nse": 0.7489,
+      "accuracy_percent": 98.36,
+      "model_size_kb": 1809.2
+    },
+    "Autoencoder": {
+      "r2": 0.8743,
+      "rmse": 172.54,
+      "mae": 138.19,
+      "mape": 1.17,
+      "nse": 0.8743,
+      "accuracy_percent": 98.83,
+      "model_size_kb": 221.3
+    }
+  },
+  "arecanut": {
+    "LSTM": {
+      "r2": 0.8976,
+      "rmse": 47.16,
+      "mae": 38.86,
+      "mape": 1.5,
+      "nse": 0.8976,
+      "accuracy_percent": 98.5,
+      "model_size_kb": 1571.7
+    },
+    "BiLSTM": {
+      "r2": 0.9079,
+      "rmse": 44.73,
+      "mae": 36.85,
+      "mape": 1.42,
+      "nse": 0.9079,
+      "accuracy_percent": 98.58,
+      "model_size_kb": 3893.9
+    },
+    "GRU": {
+      "r2": 0.8854,
+      "rmse": 49.9,
+      "mae": 40.42,
+      "mape": 1.55,
+      "nse": 0.8854,
+      "accuracy_percent": 98.45,
+      "model_size_kb": 1202.7
+    },
+    "CNN-LSTM": {
+      "r2": 0.9081,
+      "rmse": 44.67,
+      "mae": 36.04,
+      "mape": 1.39,
+      "nse": 0.9081,
+      "accuracy_percent": 98.61,
+      "model_size_kb": 403.2
+    },
+    "Transformer": {
+      "r2": 0.7386,
+      "rmse": 75.36,
+      "mae": 60.37,
+      "mape": 2.26,
+      "nse": 0.7386,
+      "accuracy_percent": 97.74,
+      "model_size_kb": 1809.2
+    },
+    "Autoencoder": {
+      "r2": 0.7207,
+      "rmse": 77.9,
+      "mae": 62.44,
+      "mape": 2.4,
+      "nse": 0.7207,
+      "accuracy_percent": 97.6,
+      "model_size_kb": 221.3
+    }
+  },
+  "banana": {
+    "LSTM": {
+      "r2": 0.8867,
+      "rmse": 525.46,
+      "mae": 414.94,
+      "mape": 1.26,
+      "nse": 0.8867,
+      "accuracy_percent": 98.74,
+      "model_size_kb": 1571.7
+    },
+    "BiLSTM": {
+      "r2": 0.9224,
+      "rmse": 434.96,
+      "mae": 347.75,
+      "mape": 1.05,
+      "nse": 0.9224,
+      "accuracy_percent": 98.95,
+      "model_size_kb": 3893.9
+    },
+    "GRU": {
+      "r2": 0.8906,
+      "rmse": 516.33,
+      "mae": 413.43,
+      "mape": 1.25,
+      "nse": 0.8906,
+      "accuracy_percent": 98.75,
+      "model_size_kb": 1202.7
+    },
+    "CNN-LSTM": {
+      "r2": 0.9011,
+      "rmse": 491.01,
+      "mae": 393.9,
+      "mape": 1.19,
+      "nse": 0.9011,
+      "accuracy_percent": 98.81,
+      "model_size_kb": 403.2
+    },
+    "Transformer": {
+      "r2": 0.7967,
+      "rmse": 703.9,
+      "mae": 555.28,
+      "mape": 1.67,
+      "nse": 0.7967,
+      "accuracy_percent": 98.33,
+      "model_size_kb": 1809.2
+    },
+    "Autoencoder": {
+      "r2": 0.3636,
+      "rmse": 1245.41,
+      "mae": 984.95,
+      "mape": 2.98,
+      "nse": 0.3636,
+      "accuracy_percent": 97.02,
+      "model_size_kb": 221.3
+    }
+  },
+  "black pepper": {
+    "LSTM": {
+      "r2": 0.9121,
+      "rmse": 43.11,
+      "mae": 35.13,
+      "mape": 2.23,
+      "nse": 0.9121,
+      "accuracy_percent": 97.77,
+      "model_size_kb": 1571.7
+    },
+    "BiLSTM": {
+      "r2": 0.919,
+      "rmse": 41.4,
+      "mae": 33.48,
+      "mape": 2.13,
+      "nse": 0.919,
+      "accuracy_percent": 97.87,
+      "model_size_kb": 3893.9
+    },
+    "GRU": {
+      "r2": 0.9104,
+      "rmse": 43.53,
+      "mae": 35.46,
+      "mape": 2.26,
+      "nse": 0.9104,
+      "accuracy_percent": 97.74,
+      "model_size_kb": 1202.7
+    },
+    "CNN-LSTM": {
+      "r2": 0.8993,
+      "rmse": 46.14,
+      "mae": 37.08,
+      "mape": 2.37,
+      "nse": 0.8993,
+      "accuracy_percent": 97.63,
+      "model_size_kb": 403.2
+    },
+    "Transformer": {
+      "r2": 0.728,
+      "rmse": 75.85,
+      "mae": 64.0,
+      "mape": 3.92,
+      "nse": 0.728,
+      "accuracy_percent": 96.08,
+      "model_size_kb": 1809.2
+    },
+    "Autoencoder": {
+      "r2": 0.5796,
+      "rmse": 94.29,
+      "mae": 75.69,
+      "mape": 4.9,
+      "nse": 0.5796,
+      "accuracy_percent": 95.1,
+      "model_size_kb": 221.3
+    }
+  },
+  "cashew": {
+    "LSTM": {
+      "r2": 0.9101,
+      "rmse": 37.1,
+      "mae": 29.95,
+      "mape": 2.38,
+      "nse": 0.9101,
+      "accuracy_percent": 97.62,
+      "model_size_kb": 1571.7
+    },
+    "BiLSTM": {
+      "r2": 0.9254,
+      "rmse": 33.79,
+      "mae": 27.93,
+      "mape": 2.22,
+      "nse": 0.9254,
+      "accuracy_percent": 97.78,
+      "model_size_kb": 3893.9
+    },
+    "GRU": {
+      "r2": 0.912,
+      "rmse": 36.7,
+      "mae": 29.54,
+      "mape": 2.35,
+      "nse": 0.912,
+      "accuracy_percent": 97.65,
+      "model_size_kb": 1202.7
+    },
+    "CNN-LSTM": {
+      "r2": 0.9027,
+      "rmse": 38.59,
+      "mae": 31.09,
+      "mape": 2.47,
+      "nse": 0.9027,
+      "accuracy_percent": 97.53,
+      "model_size_kb": 403.2
+    },
+    "Transformer": {
+      "r2": 0.7529,
+      "rmse": 61.5,
+      "mae": 49.29,
+      "mape": 3.74,
+      "nse": 0.7529,
+      "accuracy_percent": 96.26,
+      "model_size_kb": 1809.2
+    },
+    "Autoencoder": {
+      "r2": 0.9191,
+      "rmse": 35.19,
+      "mae": 29.15,
+      "mape": 2.33,
+      "nse": 0.9191,
+      "accuracy_percent": 97.67,
+      "model_size_kb": 221.3
+    }
+  },
+  "cocoa": {
+    "LSTM": {
+      "r2": 0.9008,
+      "rmse": 26.31,
+      "mae": 21.29,
+      "mape": 1.87,
+      "nse": 0.9008,
+      "accuracy_percent": 98.13,
+      "model_size_kb": 1571.7
+    },
+    "BiLSTM": {
+      "r2": 0.9206,
+      "rmse": 23.53,
+      "mae": 18.77,
+      "mape": 1.64,
+      "nse": 0.9206,
+      "accuracy_percent": 98.36,
+      "model_size_kb": 3893.9
+    },
+    "GRU": {
+      "r2": 0.8967,
+      "rmse": 26.85,
+      "mae": 21.68,
+      "mape": 1.9,
+      "nse": 0.8967,
+      "accuracy_percent": 98.1,
+      "model_size_kb": 1202.7
+    },
+    "CNN-LSTM": {
+      "r2": 0.8955,
+      "rmse": 26.99,
+      "mae": 21.13,
+      "mape": 1.85,
+      "nse": 0.8955,
+      "accuracy_percent": 98.15,
+      "model_size_kb": 403.2
+    },
+    "Transformer": {
+      "r2": 0.7629,
+      "rmse": 40.67,
+      "mae": 32.38,
+      "mape": 2.74,
+      "nse": 0.7629,
+      "accuracy_percent": 97.26,
+      "model_size_kb": 1809.2
+    },
+    "Autoencoder": {
+      "r2": 0.911,
+      "rmse": 24.92,
+      "mae": 19.74,
+      "mape": 1.72,
+      "nse": 0.911,
+      "accuracy_percent": 98.28,
+      "model_size_kb": 221.3
+    }
+  },
+  "sweet potato": {
+    "LSTM": {
+      "r2": 0.9223,
+      "rmse": 291.54,
+      "mae": 231.02,
+      "mape": 1.74,
+      "nse": 0.9223,
+      "accuracy_percent": 98.26,
+      "model_size_kb": 1571.7
+    },
+    "BiLSTM": {
+      "r2": 0.9276,
+      "rmse": 281.5,
+      "mae": 225.31,
+      "mape": 1.7,
+      "nse": 0.9276,
+      "accuracy_percent": 98.3,
+      "model_size_kb": 3893.9
+    },
+    "GRU": {
+      "r2": 0.9244,
+      "rmse": 287.74,
+      "mae": 229.96,
+      "mape": 1.72,
+      "nse": 0.9244,
+      "accuracy_percent": 98.28,
+      "model_size_kb": 1202.7
+    },
+    "CNN-LSTM": {
+      "r2": 0.9107,
+      "rmse": 312.69,
+      "mae": 248.58,
+      "mape": 1.87,
+      "nse": 0.9107,
+      "accuracy_percent": 98.13,
+      "model_size_kb": 403.2
+    },
+    "Transformer": {
+      "r2": 0.7498,
+      "rmse": 523.27,
+      "mae": 414.1,
+      "mape": 3.07,
+      "nse": 0.7498,
+      "accuracy_percent": 96.93,
+      "model_size_kb": 1809.2
+    },
+    "Autoencoder": {
+      "r2": 0.5286,
+      "rmse": 718.28,
+      "mae": 569.7,
+      "mape": 4.35,
+      "nse": 0.5286,
+      "accuracy_percent": 95.65,
+      "model_size_kb": 221.3
     }
   }
 }
