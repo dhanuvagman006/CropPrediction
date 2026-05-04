@@ -216,6 +216,141 @@ a:hover {
   box-shadow: var(--shadow-md);
 }
 
+/* EVALUATION PAGE */
+.evaluation-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.control-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-light);
+}
+
+.control-select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-white);
+  font-size: 0.95rem;
+}
+
+.control-actions {
+  display: flex;
+  align-items: end;
+  justify-content: flex-start;
+}
+
+.evaluation-hint {
+  grid-column: 1 / -1;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.evaluation-summary {
+  margin-bottom: 20px;
+}
+
+.evaluation-summary-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 12px;
+}
+
+.evaluation-summary-card h3 {
+  margin-bottom: 4px;
+}
+
+.metric-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.metric-chip {
+  background: rgba(27, 67, 50, 0.08);
+  border-radius: 999px;
+  padding: 6px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.metric-chip span {
+  color: var(--text-muted);
+}
+
+.metric-chip strong {
+  color: var(--primary);
+}
+
+.evaluation-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.evaluation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.plot-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.plot-image {
+  background: #f9f7f2;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plot-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.plot-meta {
+  padding: 16px;
+}
+
+.plot-meta h4 {
+  margin-bottom: 6px;
+}
+
+.evaluation-empty,
+.evaluation-loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
 /* PAGE HEADER */
 .page-header {
   padding: 100px 0 40px;

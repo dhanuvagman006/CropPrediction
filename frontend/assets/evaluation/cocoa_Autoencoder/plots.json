@@ -1,0 +1,46 @@
+{
+  "crop": "cocoa",
+  "model": "Autoencoder",
+  "metrics": {
+    "r2": 0.911,
+    "rmse": 24.92,
+    "mae": 19.74,
+    "mape": 1.72,
+    "accuracy_percent": 98.28
+  },
+  "plots": [
+    {
+      "title": "Predicted vs Actual",
+      "file": "predicted_vs_actual.png",
+      "description": "Scatter plot with identity line."
+    },
+    {
+      "title": "Residual Analysis",
+      "file": "residuals.png",
+      "description": "Residuals vs predicted and residual distribution."
+    },
+    {
+      "title": "Yield Category Confusion Matrix",
+      "file": "confusion_matrix.png",
+      "description": "Confusion matrix for yield categories."
+    },
+    {
+      "title": "Precision / Recall / F1",
+      "file": "precision_recall_f1.png",
+      "description": "Classification metrics per category."
+    },
+    {
+      "title": "ROC Curve (One-vs-Rest)",
+      "file": "roc_curve.png",
+      "description": "ROC curves for each yield category."
+    },
+    {
+      "title": "Permutation Feature Importance",
+      "file": "feature_importance.png",
+      "description": "Permutation importance based on R2 drop."
+    }
+  ],
+  "notes": [
+    "Training history not provided; skipped loss curves."
+  ]
+}

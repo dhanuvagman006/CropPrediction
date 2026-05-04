@@ -10,8 +10,9 @@ crop-yield-prediction/
 │   ├── app.py                  # Flask API server (port 5000)
 │   ├── dataset_generator.py    # Generates synthetic dataset (16,000+ rows)
 │   ├── train_models.py         # Trains 48 DL models (8 crops × 6 models)
+│   ├── generate_evaluation_plots.py # Generates evaluation plots for a crop/model
 │   ├── predict.py              # Inference module with model caching
-│   ├── models/                 # Saved .h5 models and .pkl scalers
+│   ├── models/                 # Saved .keras models and .pkl scalers
 │   ├── data/
 │   │   └── dakshina_kannada_crop_data.csv  # Generated dataset
 │   ├── metrics/
@@ -22,12 +23,14 @@ crop-yield-prediction/
 │   ├── predict.html            # Prediction interface
 │   ├── crops.html              # Crop information table & seasonal calendar
 │   ├── comparison.html         # Model comparison with 5 Chart.js charts
+│   ├── evaluation.html         # Evaluation dashboard for plots
 │   ├── css/
 │   │   └── style.css           # Custom academic dashboard styling
 │   ├── js/
 │   │   ├── predict.js          # Dynamic form rendering & prediction
 │   │   ├── crops.js            # Crop table & calendar rendering
-│   │   └── comparison.js       # Charts, sorting, recommendations
+│   │   ├── comparison.js       # Charts, sorting, recommendations
+│   │   └── evaluation.js       # Plot loading and rendering
 │   └── assets/
 └── README.md
 ```
@@ -62,7 +65,18 @@ python app.py
 ```
 The API will start on `http://localhost:5000`.
 
-### Step 5: Open the Frontend
+### Step 5: Generate Evaluation Plots (Optional)
+```bash
+python generate_evaluation_plots.py --crop rice --model LSTM
+```
+This will create plots in `frontend/assets/evaluation/rice_LSTM/` along with `plots.json` used by the evaluation page.
+
+Generate plots for all crops and models:
+```bash
+python generate_evaluation_plots.py --all
+```
+
+### Step 6: Open the Frontend
 Open `frontend/index.html` in your browser, or use a local server:
 ```bash
 cd frontend
