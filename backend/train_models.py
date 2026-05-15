@@ -34,10 +34,12 @@ NUMERIC_COLS = [
 ]
 
 # FIX: removed duplicate constant declarations (BATCH_SIZE, PATIENCE, LEARNING_RATE, EPOCHS were declared twice)
-EPOCHS = 150
-BATCH_SIZE = 32
-PATIENCE = 15
-LEARNING_RATE = 0.001
+EPOCHS = 200
+BATCH_SIZE = 16
+PATIENCE = 20
+LEARNING_RATE = 0.0005
+AUTOENCODER_PRETRAIN_EPOCHS = 80
+AUTOENCODER_REGRESSION_EPOCHS = 150
 
 # FIX: use .keras format (replaces deprecated .h5 format for TF >= 2.12)
 MODEL_EXT = ".keras"
@@ -101,12 +103,12 @@ def build_transformer(input_dim):
     inp = keras.Input(shape=(1, input_dim))
     x = layers.Dense(128, activation="relu")(inp)
     x = layers.LayerNormalization()(x)
-    attn_out = layers.MultiHeadAttention(num_heads=4, key_dim=32)(x, x)
+    attn_out = layers.MultiHeadAttention(num_heads=4, key_dim=16)(x, x)
     x = layers.Add()([x, attn_out])
     x = layers.LayerNormalization()(x)
-    ff = layers.Dense(256, activation="relu")(x)
-    ff = layers.Dropout(0.1)(ff)
-    ff = layers.Dense(128, activation="relu")(ff)
+    ff = layers.Dense(192, activation="relu")(x)
+    ff = layers.Dropout(0.15)(ff)
+    ff = layers.Dense(96, activation="relu")(ff)
     x = layers.Add()([x, ff])
     x = layers.LayerNormalization()(x)
     x = layers.GlobalAveragePooling1D()(x)
@@ -220,7 +222,7 @@ def train_single_model(model_name, X_train, y_train, X_val, y_val, X_test, y_tes
             autoencoder.compile(optimizer=keras.optimizers.Adam(learning_rate=cur_lr), loss="mse")
             autoencoder.fit(
                 X_train, X_train,
-                epochs=50, batch_size=BATCH_SIZE,
+                epochs=AUTOENCODER_PRETRAIN_EPOCHS, batch_size=BATCH_SIZE,
                 validation_data=(X_val, X_val),
                 callbacks=[early_stop],
                 verbose=0,
@@ -233,7 +235,7 @@ def train_single_model(model_name, X_train, y_train, X_val, y_val, X_test, y_tes
             model.compile(optimizer=keras.optimizers.Adam(learning_rate=cur_lr), loss="mse")
             model.fit(
                 X_train, y_train,
-                epochs=100, batch_size=BATCH_SIZE,
+                epochs=AUTOENCODER_REGRESSION_EPOCHS, batch_size=BATCH_SIZE,
                 validation_data=(X_val, y_val),
                 callbacks=[early_stop],
                 verbose=0,
