@@ -33,13 +33,12 @@ NUMERIC_COLS = [
     "plant_age_years", "previous_year_yield", "elevation_m", "slope_percent",
 ]
 
-# FIX: removed duplicate constant declarations (BATCH_SIZE, PATIENCE, LEARNING_RATE, EPOCHS were declared twice)
-EPOCHS = 200
+# FIX: removed duplicate constant declarations (BATCH_SIZE, LEARNING_RATE, EPOCHS were declared twice)
+EPOCHS = 240
 BATCH_SIZE = 16
-PATIENCE = 20
 LEARNING_RATE = 0.0005
-AUTOENCODER_PRETRAIN_EPOCHS = 80
-AUTOENCODER_REGRESSION_EPOCHS = 150
+AUTOENCODER_PRETRAIN_EPOCHS = 100
+AUTOENCODER_REGRESSION_EPOCHS = 180
 
 # FIX: use .keras format (replaces deprecated .h5 format for TF >= 2.12)
 MODEL_EXT = ".keras"
@@ -161,6 +160,12 @@ def compute_nse(y_true, y_pred):
     return 1.0 - (ss_res / ss_tot)
 
 
+def make_reduce_lr_callback():
+    return callbacks.ReduceLROnPlateau(
+        monitor="val_loss", factor=0.5, patience=7, min_lr=1e-6, mode="min"
+    )
+
+
 def prepare_data(df):
     label_encoders = {}
     for col in CATEGORICAL_COLS:
@@ -198,13 +203,6 @@ def prepare_data(df):
 
 def train_single_model(model_name, X_train, y_train, X_val, y_val, X_test, y_test,
                        y_train_orig, y_test_orig, scaler_y, input_dim, crop_name):
-    early_stop = callbacks.EarlyStopping(
-        monitor="val_loss", patience=PATIENCE, restore_best_weights=True, mode="min"
-    )
-    reduce_lr = callbacks.ReduceLROnPlateau(
-        monitor="val_loss", factor=0.5, patience=7, min_lr=1e-6, mode="min"
-    )
-
     best_r2 = -999
     best_result = None
     # FIX: initialise best_model to None so it's always defined; we raise clearly if training produced nothing
@@ -224,7 +222,7 @@ def train_single_model(model_name, X_train, y_train, X_val, y_val, X_test, y_tes
                 X_train, X_train,
                 epochs=AUTOENCODER_PRETRAIN_EPOCHS, batch_size=BATCH_SIZE,
                 validation_data=(X_val, X_val),
-                callbacks=[early_stop],
+                callbacks=[make_reduce_lr_callback()],
                 verbose=0,
             )
             # Copy trained encoder weights into the encoder_model
@@ -237,7 +235,7 @@ def train_single_model(model_name, X_train, y_train, X_val, y_val, X_test, y_tes
                 X_train, y_train,
                 epochs=AUTOENCODER_REGRESSION_EPOCHS, batch_size=BATCH_SIZE,
                 validation_data=(X_val, y_val),
-                callbacks=[early_stop],
+                callbacks=[make_reduce_lr_callback()],
                 verbose=0,
             )
             test_x = X_test
@@ -253,7 +251,7 @@ def train_single_model(model_name, X_train, y_train, X_val, y_val, X_test, y_tes
                 X_train_seq, y_train,
                 epochs=cur_epochs, batch_size=BATCH_SIZE,
                 validation_data=(X_val_seq, y_val),
-                callbacks=[early_stop, reduce_lr],
+                callbacks=[make_reduce_lr_callback()],
                 verbose=0,
             )
             test_x = X_test_seq
