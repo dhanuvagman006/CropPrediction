@@ -1,4 +1,14 @@
-const API_BASE = "http://localhost:5000/api";
+function getApiBase() {
+  const params = new URLSearchParams(window.location.search);
+  const paramBase = params.get("api");
+  if (paramBase) return paramBase.replace(/\/$/, "");
+  if (window.location.protocol !== "file:") {
+    return `${window.location.origin}/api`;
+  }
+  return "http://localhost:5000/api";
+}
+
+const API_BASE = getApiBase();
 let currentCrop = "rice";
 let currentModel = "LSTM";
 let featureConfig = null;
