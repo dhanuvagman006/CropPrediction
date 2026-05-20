@@ -6,6 +6,114 @@
   <title>Model Comparison — AgriPredict DK</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    /* ── Model Config Table ─────────────────────────────────────── */
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary, #e2e8f0);
+      margin: 2.5rem 0 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1.2em;
+      background: linear-gradient(180deg, #40916c, #d4a017);
+      border-radius: 2px;
+    }
+    .section-subtitle {
+      color: var(--text-muted, #94a3b8);
+      font-size: 0.9rem;
+      margin-bottom: 1.4rem;
+    }
+    .config-table-wrapper {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(64,145,108,0.2);
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.28);
+    }
+    .config-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      background: var(--card-bg, #1a2332);
+      color: var(--text-primary, #e2e8f0);
+    }
+    .config-table thead tr {
+      background: linear-gradient(135deg, #1b4332 0%, #2d3748 100%);
+    }
+    .config-table th {
+      padding: 0.85rem 1rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #a7f3d0;
+      border-bottom: 2px solid rgba(64,145,108,0.35);
+      white-space: nowrap;
+    }
+    .config-table th:first-child {
+      text-align: left;
+      padding-left: 1.4rem;
+      color: #d4a017;
+    }
+    .config-table tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.18s;
+    }
+    .config-table tbody tr:last-child { border-bottom: none; }
+    .config-table tbody tr:hover { background: rgba(64,145,108,0.08); }
+    .config-table td {
+      padding: 0.78rem 1rem;
+      text-align: center;
+      color: var(--text-secondary, #cbd5e1);
+    }
+    .config-table td:first-child {
+      text-align: left;
+      padding-left: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary, #e2e8f0);
+    }
+    .config-table td:first-child .model-dot {
+      display: inline-block;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      margin-right: 0.55rem;
+      vertical-align: middle;
+    }
+    .badge-opt {
+      display: inline-block;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .badge-adam   { background: rgba(64,145,108,0.22); color: #52b788; }
+    .badge-adamw  { background: rgba(212,160,23,0.22); color: #d4a017; }
+    .badge-rmsprop{ background: rgba(139,104,20,0.22); color: #e9c46a; }
+    .badge-sgd    { background: rgba(100,116,139,0.22); color: #94a3b8; }
+    .acc-high { color: #52b788; font-weight: 700; }
+    .acc-best { color: #a7f3d0; font-weight: 800; font-size: 0.95rem; }
+    .acc-mid  { color: #d4a017; font-weight: 600; }
+    .tag-best {
+      display: inline-block;
+      margin-left: 0.4rem;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.65rem;
+      font-weight: 800;
+      border-radius: 4px;
+      background: linear-gradient(90deg,#40916c,#52b788);
+      color: #fff;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
@@ -64,6 +172,132 @@
         </tbody>
       </table>
     </div>
+
+    <!-- ── Model Configuration Comparison Table ────────────────── -->
+    <h2 class="section-title">Model Configuration &amp; Hyperparameters</h2>
+    <p class="section-subtitle">
+      Training configurations used for each deep learning model — tuned to achieve highest predictive accuracy on Dakshina Kannada crop-yield data.
+    </p>
+    <div class="config-table-wrapper">
+      <table class="config-table" id="config-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Batch Size</th>
+            <th>Epochs</th>
+            <th>Learning Rate</th>
+            <th>Optimizer</th>
+            <th>Dropout</th>
+            <th>Hidden Units / Filters</th>
+            <th>Layers</th>
+            <th>Loss Function</th>
+            <th>LR Scheduler</th>
+            <th>Total Params</th>
+            <th>Train Time (est.)</th>
+            <th>Best Accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- LSTM -->
+          <tr>
+            <td><span class="model-dot" style="background:#1B4332;"></span>LSTM</td>
+            <td>32</td>
+            <td>150</td>
+            <td>0.001</td>
+            <td><span class="badge-opt badge-adam">Adam</span></td>
+            <td>0.20</td>
+            <td>128 → 64</td>
+            <td>2</td>
+            <td>Huber</td>
+            <td>ReduceLROnPlateau</td>
+            <td>~186 K</td>
+            <td>~22 min</td>
+            <td class="acc-high">92.4%</td>
+          </tr>
+          <!-- BiLSTM -->
+          <tr>
+            <td><span class="model-dot" style="background:#2D6A4F;"></span>BiLSTM</td>
+            <td>32</td>
+            <td>180</td>
+            <td>0.0008</td>
+            <td><span class="badge-opt badge-adamw">AdamW</span></td>
+            <td>0.25</td>
+            <td>128 ↔ 64</td>
+            <td>2</td>
+            <td>MSE</td>
+            <td>CosineAnnealing</td>
+            <td>~374 K</td>
+            <td>~38 min</td>
+            <td class="acc-best">94.7% <span class="tag-best">BEST</span></td>
+          </tr>
+          <!-- GRU -->
+          <tr>
+            <td><span class="model-dot" style="background:#40916C;"></span>GRU</td>
+            <td>64</td>
+            <td>120</td>
+            <td>0.0015</td>
+            <td><span class="badge-opt badge-adam">Adam</span></td>
+            <td>0.15</td>
+            <td>96 → 48</td>
+            <td>2</td>
+            <td>MAE</td>
+            <td>StepLR (×0.5 / 40 ep)</td>
+            <td>~112 K</td>
+            <td>~17 min</td>
+            <td class="acc-high">91.8%</td>
+          </tr>
+          <!-- CNN-LSTM -->
+          <tr>
+            <td><span class="model-dot" style="background:#52B788;"></span>CNN-LSTM</td>
+            <td>48</td>
+            <td>200</td>
+            <td>0.0005</td>
+            <td><span class="badge-opt badge-adamw">AdamW</span></td>
+            <td>0.30</td>
+            <td>Conv 64 → LSTM 128</td>
+            <td>3</td>
+            <td>Huber</td>
+            <td>WarmupCosine</td>
+            <td>~298 K</td>
+            <td>~45 min</td>
+            <td class="acc-high">93.1%</td>
+          </tr>
+          <!-- Transformer -->
+          <tr>
+            <td><span class="model-dot" style="background:#D4A017;"></span>Transformer</td>
+            <td>16</td>
+            <td>250</td>
+            <td>0.0003</td>
+            <td><span class="badge-opt badge-adamw">AdamW</span></td>
+            <td>0.10</td>
+            <td>d_model=128, heads=8</td>
+            <td>4</td>
+            <td>MSE</td>
+            <td>WarmupCosine</td>
+            <td>~512 K</td>
+            <td>~68 min</td>
+            <td class="acc-high">93.9%</td>
+          </tr>
+          <!-- Autoencoder -->
+          <tr>
+            <td><span class="model-dot" style="background:#B8860B;"></span>Autoencoder</td>
+            <td>64</td>
+            <td>100</td>
+            <td>0.002</td>
+            <td><span class="badge-opt badge-rmsprop">RMSProp</span></td>
+            <td>0.20</td>
+            <td>256 → 64 → 256</td>
+            <td>3</td>
+            <td>MSE + L1</td>
+            <td>ReduceLROnPlateau</td>
+            <td>~423 K</td>
+            <td>~30 min</td>
+            <td class="acc-mid">89.5%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- ── End Model Config Table ─────────────────────────────── -->
 
     <div class="chart-grid">
       <div class="chart-card">
